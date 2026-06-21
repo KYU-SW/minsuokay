@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minsu Kwak | DXP Lab</title>
+    <!-- 폰트어썸 (아이콘) 무료 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 구글 폰트 (Pretendard 대체용 널리 쓰이는 Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* 건양대학교 메인 그린 컬러 톤 적용 */
+            --primary-color: #005a3c; 
+            --primary-light: #007a52;
+            --primary-dark: #003d29;
+            --text-color: #333333;
+            --text-light: #666666;
+            --bg-color: #f4f7f6;
+            --white: #ffffff;
+            --primary-color: #1F3A5F;   /* 딥 네이비 */
+            --primary-light: #2E527F;   /* 밝은 네이비 */
+            --primary-dark: #152A45;    /* 진한 네이비 */
+
+            --text-color: #1E293B;      /* 짙은 슬레이트 */
+            --text-light: #64748B;      /* 부드러운 회청색 */
+            --bg-color: #F8FAFC;        /* 아주 옅은 블루그레이 */
+            --white: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-top: 70px; /* 네비게이션 바 높이만큼 여백 */
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .role {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: -3rem auto 3rem;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .about-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Cards Layout (CSS Grid) */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+        }
+
+        .card-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-fill {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-fill:hover {
+            background: var(--primary-dark);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="navbar">
+    <a href="#" class="nav-logo">
+        <i class="fa-solid fa-vr-cardboard"></i> MINSU portfolio
+    </a>
+    <ul class="nav-links">
+        <li><a href="#" class="active"><i class="fa-solid fa-wand-magic-sparkles"></i> 현재 페이지 (Modern)</a></li>
+        <!-- 이전 페이지 파일명을 old.html 혹은 previous.html 로 맞추어 학생들에게 링크 이동을 시연하시면 됩니다 -->
+        <li><a href="index_initial.html"><i class="fa-solid fa-clock-rotate-left"></i> 이전 페이지 (Basic)</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+    <h1>Minsu Kwak</h1>
+    <p class="role">메타버스 프로그래밍 수업을 통하여 로블록스 스튜디오를 배우면서 상징하는 애니메이션 건물을 만들고
+        또한 백제의 부여를 홍보하기 위한 트레일러 영상을 기획 하면서 다양한 아이디어와 창의적인 콘텐츠가 머리 속으로 떠올랐다
+        그리하여 아이디어를 실현 시키기 위해 공학적 기술을 활용하여 콘텐츠의 완성도를 높였다.
+    </p>
+</header>
+
+<main class="container">
+    <!-- About Section -->
+    <section class="about-card">
+        <h2><i class="fa-solid fa-user-tie"></i> 자기소개</h2>
+        <p>
+            안녕하세요. 저는 건양대학교 NATIONAL DEFENCE XR 재학중인 곽민수 입니다.
+            사용자 경험 개선과 <strong>컴퓨터 공학 실감형 콘텐츠 등</strong> 집중하고 있습니다. 
+            <strong>차세대 기반 XR 솔루션</strong> 구축에 집중하고 있습니다. 
+            컴퓨터 비전 및 미디어 스트리밍 역량을 바탕으로 방송, 교육, 엔터테인먼트 등 다양한 도메인을 위한 차세대 영상 기반 XR 솔루션을 탐구합니다.
+        </p>
+    </section>
+
+    <h2 class="section-title">카드 리스트</h2>
+    
+    <!-- Cards Section -->
+    <section class="card-grid">
+        <!-- Card 1 -->
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=600&q=80" alt="VR Headset" class="card-img">
+            <div class="card-content">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>XR과 함께 지역의 활성화</h3>
+                <p>실감형 콘텐츠를 활용하여 의료및 시뮬레이션의 도움과 우리의 지역의 활성화를 높일 수 있습니다.</p>
+            </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Data Analysis" class="card-content-img card-img">
+            <div class="card-content">
+                <i class="fa-solid fa-eye"></i>
+                <h3>전공 수강하는 목록</h3>
+                <p>메타버스 프로그래밍, 실감미디어개론, XR문화지형도</p>
+            </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2Fdb1LCN%2FbtsJOEdtur8%2FAAAAAAAAAAAAAAAAAAAAAMNsHOsdE8jmMdIp999i56UhIoHGubovMN2F0IZ2pkHB%2Fimg.jpg%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1782831599%26allow_ip%3D%26allow_referer%3D%26signature%3D6RJ95Um5O7UpoI3m%252Bp7khgQR5M8%253D" alt="Medical Technology" class="card-img">
+            <div class="card-content">
+                <i class="fa-solid fa-bed-pulse"></i>
+                <h3>앞으로 나의 VISION</h3>
+                <p>기술과 예술을 모두 이해하는 소통능력 개발자와 디자이너 기획자의 언어를 모두 이해할 수 있는 것과 창의적인 콘텐츠 기획으로 돌파</p>
+            </div>
+        </article>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Let's Connect</h2>
+        <p style="margin-top: 10px; color: var(--text-light);">NATIONAL DEFENCE XR과 저의 이야기가 궁금하신다면 언제든 연락주세요.</p>
+        <div class="contact-links">
+            <a href="mailto:example@korea.ac.kr" class="btn btn-fill">
+                <i class="fa-solid fa-envelope"></i> Email Me
+            </a>
+            <a href="https://github.com" class="btn btn-outline" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="#" class="btn btn-outline">
+                <i class="fa-solid fa-globe"></i> Lab Website
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; MINSU KWAK의 포트폴리오 오신 것을 환영합니다</p>
+</footer>
+
+</body>
+</html>
